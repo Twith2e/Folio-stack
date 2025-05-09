@@ -1,4 +1,4 @@
-import { ComponentType, ReactNode } from "react";
+import { ComponentType } from "react";
 
 export type FeatureCardPropsType = {
   title: string;
