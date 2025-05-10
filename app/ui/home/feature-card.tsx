@@ -1,4 +1,4 @@
-import { FeatureCardPropsType } from "../definitions";
+import { FeatureCardPropsType } from "../../definitions";
 
 export default function FeatureCard({
   title,

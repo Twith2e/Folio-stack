@@ -3,6 +3,7 @@ import "./globals.css";
 import { inter } from "./fonts";
 import Navbar from "./ui/nav-bar";
 import Head from "next/head";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Folio Stack",
@@ -15,16 +16,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <Head>
-        <link rel="icon" href="/favicon.png" />
-      </Head>
-      <body className={`${inter.className} antialiased`}>
-        <header className="bg-white fixed top-0 w-full z-10">
-          <Navbar />
-        </header>
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <Head>
+          <link rel="icon" href="/favicon.png" />
+        </Head>
+        <body className={`${inter.className} antialiased`}>
+          <header className="bg-white fixed top-0 w-full z-10">
+            <Navbar />
+          </header>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

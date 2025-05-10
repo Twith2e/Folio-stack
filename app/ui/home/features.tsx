@@ -1,4 +1,4 @@
-import { featuresInfos } from "../data";
+import { featuresInfos } from "../../data";
 import FeatureCard from "./feature-card";
 
 export default function Features() {

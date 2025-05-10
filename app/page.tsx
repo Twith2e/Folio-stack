@@ -1,5 +1,5 @@
-import Features from "./home/features";
-import Hero from "./home/hero";
+import Features from "./ui/home/features";
+import Hero from "./ui/home/hero";
 
 export default function Home() {
   return (

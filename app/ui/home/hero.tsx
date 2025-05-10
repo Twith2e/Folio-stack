@@ -25,7 +25,7 @@ export default function Hero() {
       <div className="flex gap-3 items-center mt-5">
         <Link
           className="bg-[#4F46E5] p-3 rounded-md text-white text-sm font-medium active:scale-103 transition-all duration-200"
-          href=""
+          href="/portfolio-generator"
         >
           <span>Start Building</span>
         </Link>
