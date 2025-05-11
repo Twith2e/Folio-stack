@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-5xl text-center font-black w-1/2 mx-auto mb-5 relative">
+      <h2 className="text-xl lg:text-5xl text-center font-black w-1/2 mx-auto mb-5 relative">
         Build & Launch Your Portfolio in Minutes
         <svg
           className="absolute w-full h-4 left-0 -bottom-2"
@@ -37,13 +37,24 @@ export default function Hero() {
         </Link>
       </div>
       <div className="bg-[#22C55E] shadow-lg rounded-lg p-5 mt-10">
-        <Image
-          className="rounded-lg"
-          src="/screenshot.png"
-          width={1000}
-          height={1000}
-          alt="Screenshot"
-        />
+        <div className="hidden sm:block">
+          <Image
+            className="rounded-lg w-full h-auto"
+            src="/screenshot.png"
+            width={1000}
+            height={1000}
+            alt="Screenshot"
+          />
+        </div>
+        <div className="block sm:hidden">
+          <Image
+            className="rounded-lg w-full h-auto"
+            src="/screenshot-mobile.jpg"
+            width={1000}
+            height={1000}
+            alt="Screenshot Mobile"
+          />
+        </div>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import { LuLinkedin } from "react-icons/lu";
 import Link from "next/link";
 
 export default function Preview() {
-  const { profile, projects, theme } = usePortfolioState();
+  const { profile } = usePortfolioState();
   return (
     <div className="flex-1 border border-gray-300 p-5 bg-[#2b2b2b]">
       {profile.name && (
