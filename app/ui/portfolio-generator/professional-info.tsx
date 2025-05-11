@@ -1,7 +1,7 @@
 "use client";
 
 import { usePortfolioDispatch } from "@/app/contexts/portfolio-state-context";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 export default function ProfessionalInfo() {
   const dispatch = usePortfolioDispatch();
