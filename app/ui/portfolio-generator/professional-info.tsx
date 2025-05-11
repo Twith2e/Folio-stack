@@ -4,7 +4,7 @@ import { usePortfolioDispatch } from "@/app/contexts/portfolio-state-context";
 import { useState } from "react";
 
 export default function ProfessionalInfo() {
-  const dispatch = usePortfolioDispatch();
+  //   const dispatch = usePortfolioDispatch();
   const [count, setCount] = useState(1);
 
   //   function onJobTitleChange(e: ChangeEvent<HTMLInputElement>) {
