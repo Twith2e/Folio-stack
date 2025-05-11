@@ -14,7 +14,22 @@ export interface Profile {
   name: string;
   bio: string;
   skills: string[];
+  projects: Project[];
+  theme: Theme;
+  templateId: string;
+  email: string;
+  linkedin: string;
+  github: string;
+  whatsapp: string;
 }
+
+export type Work = {
+  jobTitle: string;
+  company: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+};
 
 export interface Project {
   title: string;
@@ -41,6 +56,7 @@ export type PortfolioAction =
       field: keyof Profile;
       value: string | string[];
     }
+  | { type: "UPDATE_WORK_EXPERIENCE"; payload: Work[] }
   | { type: "ADD_PROJECT"; payload: Project }
   | { type: "REMOVE_PROJECT"; payload: { title: string } }
   | { type: "SET_THEME"; payload: Theme }

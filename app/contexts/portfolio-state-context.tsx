@@ -10,7 +10,18 @@ import {
 import { PortfolioAction, PortfolioState } from "../definitions";
 
 const initialState: PortfolioState = {
-  profile: { name: "", bio: "", skills: [] },
+  profile: {
+    name: "",
+    bio: "",
+    skills: [],
+    projects: [],
+    theme: { primary: "#4F46E5", secondary: "#22C55E" },
+    templateId: "default",
+    email: "",
+    linkedin: "",
+    github: "",
+    whatsapp: "",
+  },
   projects: [],
   theme: { primary: "#4F46E5", secondary: "#22C55E" },
   templateId: "default",
@@ -26,6 +37,14 @@ function portfolioReducer(state: PortfolioState, action: PortfolioAction) {
         profile: {
           ...state.profile,
           [action.field]: action.value,
+        },
+      };
+    case "UPDATE_WORK_EXPERIENCE":
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          workExperience: action.payload,
         },
       };
     case "ADD_PROJECT":
