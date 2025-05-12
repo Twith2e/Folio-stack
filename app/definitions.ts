@@ -29,6 +29,7 @@ export type Work = {
   startDate: string;
   endDate: string;
   description: string;
+  logo: string;
 };
 
 export interface Project {
@@ -47,17 +48,28 @@ export interface PortfolioState {
   projects: Project[];
   theme: Theme;
   templateId: string;
+  work: Work[];
 }
 
 export type PortfolioAction =
   | { type: "SET_PROFILE"; payload: Profile }
+  | { type: "UPDATE_PROFILE_FIELD"; field: string; value: any }
   | {
-      type: "UPDATE_PROFILE_FIELD";
-      field: keyof Profile;
-      value: string | string[];
+      type: "UPDATE_WORK_EXPERIENCE";
+      payload: {
+        index: number;
+        field: keyof Work;
+        value: string;
+      };
     }
-  | { type: "UPDATE_WORK_EXPERIENCE"; payload: Work[] }
+  | { type: "ADD_WORK_EXPERIENCE"; payload: Work }
+  | {
+      type: "UPDATE_SPECIFIC_WORK_EXPERIENCE";
+      index: number;
+      payload: Work;
+    }
+  | { type: "REMOVE_WORK_EXPERIENCE"; index: number }
   | { type: "ADD_PROJECT"; payload: Project }
-  | { type: "REMOVE_PROJECT"; payload: { title: string } }
+  | { type: "REMOVE_PROJECT"; payload: Project }
   | { type: "SET_THEME"; payload: Theme }
   | { type: "SET_TEMPLATE"; payload: string };

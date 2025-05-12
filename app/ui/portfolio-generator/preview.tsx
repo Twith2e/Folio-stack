@@ -5,9 +5,10 @@ import { FaWhatsapp, FaGithub } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { LuLinkedin } from "react-icons/lu";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Preview() {
-  const { profile } = usePortfolioState();
+  const { profile, work } = usePortfolioState();
   return (
     <div className="flex-1 border border-gray-300 p-5 bg-[#2b2b2b]">
       {profile.name && (
@@ -75,11 +76,46 @@ export default function Preview() {
             })}
           </div>
         </div>
-        {/* {profile.workExperience.length > 0 && (
+        {work.length > 0 && (
           <div>
-            <h2>Work Experience</h2>
+            <h2 className="text-xl lg:text-3xl font-medium lg:font-bold text-center my-3">
+              Work Experience
+            </h2>
+            {work.map((item, idx) => (
+              <div key={idx} className="border border-gray-100 p-2 rounded-md">
+                <div className="flex justify-between">
+                  <div className="flex gap-3 items-start">
+                    <Image
+                      src={
+                        item.logo !== "" ? item.logo : "/placeholder-logo.png"
+                      }
+                      alt={item.company}
+                      width={50}
+                      height={50}
+                    />
+                    <div className="flex flex-col gap-2">
+                      <span className="text-2xl">{item.jobTitle}</span>
+                      <div className="flex items-center gap-2 text-sm">
+                        <Link
+                          className="hover:text-[#4F46E5]"
+                          href={
+                            item.logo.split("https://logo.clearbit.com/")[1]
+                          }
+                          target="_blank"
+                        >
+                          {item.company}
+                        </Link>
+                        <span className="h-5 border border-gray-100"></span>
+                        <span>Ibadan, Nigeria</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span>Jan 2024 - Till Date</span>
+                </div>
+              </div>
+            ))}
           </div>
-        )} */}
+        )}
       </main>
     </div>
   );

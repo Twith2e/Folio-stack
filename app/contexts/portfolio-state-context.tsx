@@ -7,7 +7,7 @@ import {
   useContext,
   useReducer,
 } from "react";
-import { PortfolioAction, PortfolioState } from "../definitions";
+import { PortfolioAction, PortfolioState, Work } from "../definitions";
 
 const initialState: PortfolioState = {
   profile: {
@@ -25,27 +25,66 @@ const initialState: PortfolioState = {
   projects: [],
   theme: { primary: "#4F46E5", secondary: "#22C55E" },
   templateId: "default",
+  work: [],
 };
 
 function portfolioReducer(state: PortfolioState, action: PortfolioAction) {
   switch (action.type) {
     case "SET_PROFILE":
       return { ...state, profile: action.payload };
-    case "UPDATE_PROFILE_FIELD":
-      return {
-        ...state,
-        profile: {
-          ...state.profile,
-          [action.field]: action.value,
-        },
+    case "UPDATE_WORK_EXPERIENCE": {
+      // copy the existing array
+      const updatedWork = [...state.work];
+
+      // your full default entry (must satisfy your Work type)
+      const defaultWorkEntry: Work = {
+        jobTitle: "",
+        company: "",
+        startDate: "",
+        endDate: "",
+        description: "",
+        logo: "",
       };
-    case "UPDATE_WORK_EXPERIENCE":
+
+      const { index, field, value } = action.payload;
+
+      if (index < updatedWork.length) {
+        // — update in‐place if it already exists
+        updatedWork[index] = {
+          ...updatedWork[index],
+          [field]: value,
+        };
+      } else {
+        // — append a brand-new entry if index == length (or beyond)
+        //    we fill in defaults *then* set the one field
+        updatedWork.push({
+          ...defaultWorkEntry,
+          [field]: value,
+        });
+      }
+
       return {
         ...state,
-        profile: {
-          ...state.profile,
-          workExperience: action.payload,
-        },
+        work: updatedWork,
+      };
+    }
+
+    case "ADD_WORK_EXPERIENCE":
+      return {
+        ...state,
+        work: [...state.work, action.payload],
+      };
+    case "UPDATE_SPECIFIC_WORK_EXPERIENCE":
+      return {
+        ...state,
+        work: state.work.map((item, index) =>
+          index === action.index ? action.payload : item
+        ),
+      };
+    case "REMOVE_WORK_EXPERIENCE":
+      return {
+        ...state,
+        work: state.work.filter((_, index) => index !== action.index),
       };
     case "ADD_PROJECT":
       return {
