@@ -1,14 +1,11 @@
 "use client";
 
-import {
-  usePortfolioDispatch,
-  usePortfolioState,
-} from "@/app/contexts/portfolio-state-context";
-import { ChangeEvent, useEffect, useState } from "react";
+import { usePortfolioDispatch } from "@/app/contexts/portfolio-state-context";
+import { convertToMonth } from "@/app/utils/convert-to-month";
+import { ChangeEvent, useState } from "react";
 
 export default function ProfessionalInfo() {
   const dispatch = usePortfolioDispatch();
-  const { work } = usePortfolioState();
   const [count, setCount] = useState(0);
 
   function onJobTitleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -41,7 +38,7 @@ export default function ProfessionalInfo() {
         type: "UPDATE_WORK_EXPERIENCE",
         payload: {
           field: "description",
-          value: e.target.value,
+          value: e.target.value.split("\n"),
           index: count,
         },
       });
@@ -59,9 +56,29 @@ export default function ProfessionalInfo() {
       });
   }
 
-  useEffect(() => {
-    console.log(work);
-  }, [work]);
+  function onStartDate(e: ChangeEvent<HTMLInputElement>) {
+    if (dispatch)
+      dispatch({
+        type: "UPDATE_WORK_EXPERIENCE",
+        payload: {
+          field: "startDate",
+          value: convertToMonth(e.target.value),
+          index: count,
+        },
+      });
+  }
+
+  function onEndDate(e: ChangeEvent<HTMLInputElement>) {
+    if (dispatch)
+      dispatch({
+        type: "UPDATE_WORK_EXPERIENCE",
+        payload: {
+          field: "endDate",
+          value: convertToMonth(e.target.value),
+          index: count,
+        },
+      });
+  }
 
   return (
     <div className="mt-5">
@@ -104,6 +121,26 @@ export default function ProfessionalInfo() {
               onChange={onDescriptionChange}
               cols={30}
               rows={10}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="sDate">Start Date</label>
+            <input
+              className="form-input"
+              onChange={onStartDate}
+              type="month"
+              name=""
+              id="sDate"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="eDate">End Date</label>
+            <input
+              className="form-input"
+              onChange={onEndDate}
+              type="month"
+              name=""
+              id="eDate"
             />
           </div>
         </form>

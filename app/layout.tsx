@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { inter } from "./fonts";
+import { quicksand } from "./fonts";
 import Navbar from "./ui/nav-bar";
 import Head from "next/head";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -21,7 +21,7 @@ export default function RootLayout({
         <Head>
           <link rel="icon" href="/favicon.png" />
         </Head>
-        <body className={`${inter.className} antialiased`}>
+        <body className={`${quicksand.className} antialiased`}>
           <header className="bg-white fixed top-0 w-full z-10">
             <Navbar />
           </header>

@@ -20,7 +20,7 @@ export default function Hero() {
         </svg>
       </h2>
       <p className="text-center">
-        No code. No stress. Just your work — beautifully showcased.
+        No code. No stress. Just your work ... beautifully showcased.
       </p>
       <div className="flex gap-3 items-center mt-5">
         <Link

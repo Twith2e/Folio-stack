@@ -1,5 +1,13 @@
 import { ComponentType } from "react";
 
+export type InlineEditablePropsType = {
+  value: string;
+  placeholder: string;
+  field: keyof Profile;
+  // This can be a key of Profile, like "name", "bio", etc.
+  actionType: "SET_PROFILE";
+};
+
 export type FeatureCardPropsType = {
   title: string;
   description: string;
@@ -28,8 +36,10 @@ export type Work = {
   company: string;
   startDate: string;
   endDate: string;
-  description: string;
+  description: Array<string>;
   logo: string;
+  companyLink: string;
+  location: string;
 };
 
 export interface Project {
@@ -45,21 +55,26 @@ export interface Theme {
 
 export interface PortfolioState {
   profile: Profile;
-  projects: Project[];
-  theme: Theme;
-  templateId: string;
-  work: Work[];
+  projects?: Project[];
+  theme?: Theme;
+  templateId?: string;
+  work?: Work[];
 }
 
 export type PortfolioAction =
-  | { type: "SET_PROFILE"; payload: Profile }
-  | { type: "UPDATE_PROFILE_FIELD"; field: string; value: any }
+  | {
+      type: "SET_PROFILE";
+      payload: {
+        field: keyof Profile;
+        value: string | Array<string>;
+      };
+    }
   | {
       type: "UPDATE_WORK_EXPERIENCE";
       payload: {
         index: number;
         field: keyof Work;
-        value: string;
+        value: string | Array<string>;
       };
     }
   | { type: "ADD_WORK_EXPERIENCE"; payload: Work }
